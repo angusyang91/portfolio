@@ -111,5 +111,16 @@ def test_endpoint():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     debug = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-    app.run(host='0.0.0.0', port=port, debug=debug)
+    # For production, use gunicorn or waitress
+    # For development, use Flask's built-in server
+    if os.environ.get('RENDER') or os.environ.get('PRODUCTION'):
+        # Production mode - use waitress for better performance
+        try:
+            from waitress import serve
+            serve(app, host='0.0.0.0', port=port)
+        except ImportError:
+            # Fallback to Flask server if waitress not available
+            app.run(host='0.0.0.0', port=port, debug=False)
+    else:
+        app.run(host='0.0.0.0', port=port, debug=debug)
 
