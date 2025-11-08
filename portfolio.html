@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angus - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-text h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .career-goals {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .career-goals h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .career-goals ul {
+            list-style: none;
+        }
+
+        .career-goals li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .career-goals li:last-child {
+            border-bottom: none;
+        }
+
+        .career-goals li::before {
+            content: "→ ";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card .project-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: var(--bg-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--bg-light);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list li::before {
+            content: "✓ ";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .timeline-item h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            margin-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Angus</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#writer-projects">Writer Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Solutions Architect & Python Developer</h1>
+            <p class="subtitle">Building scalable solutions and bridging technology with business needs</p>
+            <p class="description">
+                Passionate about designing technical solutions, solving complex problems, and helping organizations 
+                leverage technology to achieve their goals. Currently focused on Python development and advancing 
+                toward solutions architecture roles.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Learn more about my background, goals, and what drives me</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>My Journey</h3>
+                    <p>
+                        I'm a dedicated Python developer with a passion for creating efficient, scalable solutions. 
+                        My work spans both professional projects and personal learning initiatives, where I continuously 
+                        explore new technologies and best practices.
+                    </p>
+                    <p>
+                        I'm actively working toward roles as a Solutions Architect, Solutions Engineer, Customer Architect, 
+                        or Technical Account Manager. These positions align perfectly with my interests in understanding 
+                        complex technical challenges, designing elegant solutions, and effectively communicating technical 
+                        concepts to diverse audiences.
+                    </p>
+                    <p>
+                        This portfolio showcases my ongoing projects, technical skills, and the practical experience I'm 
+                        building as I progress in my career.
+                    </p>
+                </div>
+                <div class="career-goals">
+                    <h3>Career Aspirations</h3>
+                    <ul>
+                        <li>Solutions Architect</li>
+                        <li>Solutions Engineer</li>
+                        <li>Customer Architect</li>
+                        <li>Technical Account Manager</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projects</h2>
+                <p>Explore my Python projects and technical work</p>
+            </div>
+            <div class="projects-grid">
+                <!-- Project Card Template - Add your projects here -->
+                <div class="project-card">
+                    <h3>Python Testing Framework</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Testing</span>
+                        <span class="project-tag">Learning</span>
+                    </div>
+                    <p>
+                        A comprehensive testing framework project exploring Python testing methodologies, 
+                        best practices, and automation techniques.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/yourusername/pytesting" target="_blank">View on GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Project Title</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">API</span>
+                    </div>
+                    <p>
+                        Description of your project. Explain what it does, the problem it solves, 
+                        and the technologies used.
+                    </p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">View on GitHub</a>
+                        <a href="#" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Project Title</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Data Analysis</span>
+                    </div>
+                    <p>
+                        Description of your project. Explain what it does, the problem it solves, 
+                        and the technologies used.
+                    </p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writer Projects Section -->
+    <section id="writer-projects" class="writer-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Writer Projects</h2>
+                <p>Custom agent development, automation solutions, and client collaboration work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Custom Agent Development for At-Risk Customers</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Agent Builder</span>
+                        <span class="project-tag">Customer Success</span>
+                        <span class="project-tag">Rapid Development</span>
+                    </div>
+                    <p>
+                        Built eight custom agents for churning customers in under two hours, addressing their specific 
+                        needs and improving engagement. These tailored solutions helped retain customers by providing 
+                        personalized automation that directly addressed their pain points.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Meta-Agent Creation & Prompt Generator</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Agent Builder</span>
+                        <span class="project-tag">Automation</span>
+                        <span class="project-tag">Meta-Programming</span>
+                    </div>
+                    <p>
+                        Developed custom agents that produce other custom agents, including a specialized prompt generator. 
+                        This meta-agent approach streamlines the agent creation process and enables rapid scaling of 
+                        automation solutions.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Diverse Custom Agent Solutions</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Agent Builder</span>
+                        <span class="project-tag">Social Media</span>
+                        <span class="project-tag">Content Generation</span>
+                    </div>
+                    <p>
+                        Collaborated with customers to build various custom agents for different use cases, including 
+                        social media content optimization and project asset generation. These solutions improved content 
+                        quality and operational efficiency for clients.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Google Apps Script Automation</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Google Apps Script</span>
+                        <span class="project-tag">API Integration</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                    <p>
+                        Leveraged Google Apps Script to integrate APIs and pull in reports on an automated basis. 
+                        This solution reduced manual effort and ensured timely, accurate data delivery for stakeholders.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Agent Builder Blueprints & JSON Automation</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Agent Builder</span>
+                        <span class="project-tag">JSON</span>
+                        <span class="project-tag">Blueprint Development</span>
+                    </div>
+                    <p>
+                        Created Clawed solutions and agents to build agent builder blueprints. Developed a custom agent 
+                        that generates JSON files to construct other custom agents, facilitating rapid deployment and 
+                        scalability of automation solutions.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Agent Builder Training & Client Collaboration</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Agent Builder</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">No-Code Flows</span>
+                        <span class="project-tag">Client Training</span>
+                    </div>
+                    <p>
+                        Conducted collaborative building sessions with customers, guiding them through Agent Builder 
+                        no-code flows. Enhanced solutions by leveraging Python blocks and classification tool-calling 
+                        blocks to process and utilize information effectively.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Skills & Technologies</h2>
+                <p>Technical competencies and tools I work with</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>HTML/CSS</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <ul class="skill-list">
+                        <li>Flask / FastAPI</li>
+                        <li>pytest</li>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>Docker</li>
+                        <li>CI/CD</li>
+                        <li>Cloud Platforms</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Solutions Architecture</h3>
+                    <ul class="skill-list">
+                        <li>System Design</li>
+                        <li>API Design</li>
+                        <li>Technical Documentation</li>
+                        <li>Stakeholder Communication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>Experience</h2>
+                <p>Professional experience and key achievements</p>
+            </div>
+            <div class="experience-timeline">
+                <!-- Add your experience here -->
+                <div class="timeline-item">
+                    <h3>Company Name</h3>
+                    <div class="role">Your Role / Position</div>
+                    <div class="date">Month Year - Present</div>
+                    <ul>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Company Name</h3>
+                    <div class="role">Your Role / Position</div>
+                    <div class="date">Month Year - Month Year</div>
+                    <ul>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Let's Connect</h2>
+                <p>
+                    I'm always interested in discussing new opportunities, technical challenges, 
+                    or potential collaborations. Feel free to reach out!
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com">Email</a>
+                    <a href="https://www.linkedin.com/in/angusyang/" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Angus. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-category, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+
