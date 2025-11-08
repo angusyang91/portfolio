@@ -2,4 +2,5 @@
 __pycache__/
 *.pyc
 *.pyo
-recipes/static/config.js
+# Allow config.js for GitHub Pages (API URL is safe to be public)
+# recipes/static/config.js
